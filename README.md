@@ -76,4 +76,12 @@ Normative specifications introduce obligations that reinforce role-specific resp
 
 ## System Workflow
 
-The system workflow is orchestrated through a combination of agent interactions and organizational specifications, ensuring seamless healthcare management within the
+The system workflow is orchestrated through a combination of agent interactions and organizational specifications, ensuring seamless healthcare management within the Multi-Agent System (MAS).
+
+The PatientCareSystem artifact manages patient prioritization through a decentralized voting process involving doctors, nurses, and patients. The result of this prioritization influences decision-making and subsequent patient care.
+
+Meanwhile, the HeartRateMonitor artifact simulates and monitors heart rates, with paramedics actively engaged in overseeing heart rate changes and taking appropriate actions.
+
+Agent communication is facilitated to share vital information such as medical conditions, preferences, and treatment processes.
+
+The organizational specifications, defined in emergency_room_org.xml and healthcare_org.xml, guide these interactions, enforcing role-based obligations and maintaining a structured workflow that aligns with predefined rules and goals.
