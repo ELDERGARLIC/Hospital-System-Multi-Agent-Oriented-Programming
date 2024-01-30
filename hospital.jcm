@@ -1,0 +1,23 @@
+
+mas hospital {
+    agent hospital_agent {
+        focus: hospital.heartRateMonitor
+    }
+
+    agent nurse_assistant : assistant.asl {
+        beliefs: preferred_heart_rate_range(60)
+                 recipient_agent(hospital_agent)
+        goals: send_preference
+    }
+
+    agent doctor_assistant : assistant.asl {
+        beliefs: preferred_heart_rate_range(65)
+                 recipient_agent(hospital_agent)
+        goals: send_preference
+    }
+
+    workspace hospital {
+        artifact heartRateMonitor: devices.HeartRateMonitor(70)
+    }
+}
+

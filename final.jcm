@@ -1,0 +1,77 @@
+mas final {
+
+	// agent definitions
+    agent doctor {
+    	focus: hospital.patient_care_system
+			   hospital.heart_rate_monitor
+    }
+
+	agent paramedic {
+        focus: hospital.heart_rate_monitor
+    }
+
+	agent nurse1 : nurse.asl {
+		beliefs: my_priorities([patient1,patient2])
+				 preferred_heart_rate_range(65)
+                 recipient_agent(paramedic)
+    	focus: hospital.patient_care_system
+	}
+
+	agent nurse2 : nurse.asl {
+		beliefs: my_priorities([patient2])
+				 preferred_heart_rate_range(65)
+                 recipient_agent(paramedic)
+    	focus: hospital.patient_care_system
+	}
+
+	agent patient1 : patient.asl {
+		beliefs: medical_condition("injury")
+				 heart_rate(120)
+	}
+
+	agent patient2 : patient.asl {
+		beliefs: medical_condition("heart_attack")
+				 heart_rate(70)
+		focus: hospital.heart_rate_monitor
+	}
+
+	// artifact definitions
+	workspace hospital {
+		artifact patient_care_system : tools.PatientCareSystem()
+		artifact heart_rate_monitor: tools.HeartRateMonitor(70)
+	}    
+	
+	// hospital organization
+	organisation healthcare_team : healthcare_org.xml {
+   		group hcgrp1 : healthcare_grp {  
+    		responsible-for: hcs1    
+    		players: doctor doctor,
+					 nurse1 nurse,
+					 nurse2 nurse,
+					 patient2 patient
+    		                   
+    	}
+    	scheme hcs1: healthcare_sch {     
+    		
+    	}
+  	}
+
+	// emergency or nromal organization
+	organisation emergency_room : emergency_room_org.xml {
+   		group ergrp1 : emergency_room_grp {  
+    		responsible-for: er1    
+    		players: nurse1 normal
+					 nurse2 normal
+					 patient2 normal
+    		                   
+    	}
+    	scheme er1 : emergency_room_sch {     
+    		
+    	}
+  	}
+  	
+    // agent source path
+    asl-path: src/agt
+              src/agt/inc
+    
+}
